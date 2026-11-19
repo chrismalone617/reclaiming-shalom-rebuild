@@ -198,6 +198,76 @@ img {
     font-size: 1.1rem;
 }
 
+/* Animated Gradient Border Button */
+.btn-gradient-border {
+    position: relative;
+    background: var(--color-dark);
+    color: var(--color-white);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-md);
+    z-index: 1;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.btn-gradient-border::before {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 300%;
+    height: 300%;
+    background:
+        radial-gradient(circle at 20% 20%, #00ff66 0%, transparent 35%),
+        radial-gradient(circle at 80% 20%, #00bfff 0%, transparent 35%),
+        radial-gradient(circle at 80% 80%, #ffee00 0%, transparent 35%),
+        radial-gradient(circle at 20% 80%, #bf00ff 0%, transparent 35%);
+    animation: float-gradient 12s ease-in-out infinite;
+    z-index: -2;
+    filter: blur(6px);
+}
+
+.btn-gradient-border::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    background: var(--color-dark);
+    border-radius: calc(var(--radius-md) - 4px);
+    z-index: -1;
+    transition: opacity 0.3s ease;
+}
+
+.btn-gradient-border:hover {
+    color: var(--color-white);
+    transform: translateY(-2px);
+}
+
+.btn-gradient-border:hover::after {
+    opacity: 0;
+}
+
+.btn-gradient-border:hover::before {
+    filter: blur(15px);
+}
+
+@keyframes float-gradient {
+    0%, 100% {
+        transform: translate(0%, 0%) rotate(0deg);
+    }
+    25% {
+        transform: translate(10%, 5%) rotate(90deg);
+    }
+    50% {
+        transform: translate(0%, 10%) rotate(180deg);
+    }
+    75% {
+        transform: translate(-10%, 5%) rotate(270deg);
+    }
+}
+
 /* ================================
    Hero Section
    ================================ */
